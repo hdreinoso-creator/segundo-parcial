@@ -680,7 +680,7 @@
       archiveCount.textContent = `${visible.length} imágenes en esta selección`;
       archiveGrid.innerHTML = visible.map((image) => `
         <figure class="archive-card${image.contain ? " contain" : ""}">
-          <img src="${image.src}" alt="${image.label}" loading="lazy" decoding="async">
+          <img src="${encodeURI(image.src)}" alt="${image.label}" loading="lazy" decoding="async">
           <figcaption>${image.label}</figcaption>
         </figure>
       `).join("");
