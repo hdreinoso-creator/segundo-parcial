@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#00c9ad">
+  <meta name="description" content="Zapatillas de baloncesto y gorras planas para jugar a tu manera. Descubre la selección HENDA.">
+  <title>HENDA — Cancha y calle</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      font-family: "DM Sans", Arial, sans-serif;
+      color: #141414;
+      background: #f7f6f1;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      --ink: #141414;
+      --paper: #f7f6f1;
+      --lime: #00d8c0;
+      --orange: #009f83;
+      --muted: #77766f;
+      --line: #deddd5;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body { min-width: 320px; margin: 0; }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--orange);
+      outline-offset: 3px;
+    }
+    button { color: inherit; }
+    .announcement { min-height: 31px; display: grid; place-items: center; padding: 6px 16px; background: var(--ink); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-align: center; text-transform: uppercase; }
+    .announcement span { color: var(--lime); }
+    .site-header { position: sticky; z-index: 10; top: 0; display: flex; align-items: center; justify-content: space-between; gap: 25px; padding: 12px max(5vw, calc((100vw - 1320px) / 2)); border-bottom: 1px solid rgb(20 20 20 / 9%); background: rgb(247 246 241 / 94%); backdrop-filter: blur(14px); }
+    .brand { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+    .brand img { width: 43px; height: 43px; border-radius: 50%; object-fit: cover; }
+    .brand-copy { display: grid; gap: 1px; }
+    .brand-name { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 24px; font-weight: 900; letter-spacing: .025em; line-height: .9; }
+    .brand-tag { color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; justify-content: center; gap: clamp(18px, 3vw, 44px); }
+    .nav-links a { position: relative; padding: 8px 0; font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+    .nav-links a::after { position: absolute; right: 0; bottom: 3px; left: 0; height: 2px; background: var(--orange); content: ""; transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-button { position: relative; width: 39px; height: 39px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; background: transparent; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+    .icon-button:hover { border-color: var(--ink); background: var(--lime); }
+    .icon-button svg { width: 17px; height: 17px; }
+    .cart-count { position: absolute; top: -4px; right: -5px; min-width: 17px; height: 17px; display: grid; place-items: center; padding: 0 4px; border: 2px solid var(--paper); border-radius: 20px; background: var(--orange); color: #fff; font-size: 8px; font-weight: 800; }
+    .menu-button { display: none; }
+
+    .page-wrap { width: min(1320px, calc(100% - 64px)); margin: 0 auto; }
+    .hero { position: relative; min-height: 570px; display: grid; grid-template-columns: 1.05fr .95fr; align-items: center; margin: 24px auto 0; overflow: hidden; background: linear-gradient(120deg, #00d8c0, #00b98d, #00c9ad); background-size: 220% 220%; animation: aqua-shift 9s ease infinite; }
+    .hero-copy { position: relative; z-index: 2; padding: 64px 0 68px 8.5%; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; font-size: 10px; font-weight: 800; letter-spacing: .19em; text-transform: uppercase; }
+    .eyebrow::before { width: 25px; height: 2px; background: currentColor; content: ""; }
+    .hero h1 { max-width: 650px; margin: 20px 0 17px; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(74px, 10.1vw, 145px); font-weight: 900; letter-spacing: -.055em; line-height: .77; text-transform: uppercase; }
+    .hero h1 span { display: block; color: var(--ink); }
+    .hero-desc { max-width: 350px; margin: 22px 0 24px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+    .button-dark { min-height: 49px; display: inline-flex; align-items: center; justify-content: center; gap: 16px; padding: 0 20px; border: 1px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; font-size: 10px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; transition: transform .2s ease, background .2s ease, color .2s ease; }
+    .button-dark:hover { transform: translateY(-3px); background: transparent; color: var(--ink); }
+    .button-dark svg { width: 16px; height: 16px; }
+    .hero-visual { position: absolute; top: 0; right: 0; bottom: 0; width: 51%; display: grid; place-items: center; }
+    .hero-orbit { position: absolute; top: 12%; right: 8%; width: min(39vw, 430px); aspect-ratio: 1; border: 1px solid rgb(20 20 20 / 20%); border-radius: 50%; box-shadow: 0 0 0 35px rgb(20 20 20 / 4%), 0 0 0 70px rgb(20 20 20 / 3%); }
+    .hero-visual img { position: relative; z-index: 1; width: min(105%, 700px); max-height: 520px; object-fit: contain; filter: drop-shadow(0 26px 15px rgb(22 23 0 / 23%)); transform: rotate(-12deg) translate(2%, 4%); transition: opacity .35s ease, transform .55s ease; }
+    .hero-visual img.is-changing, .feature-image img.is-changing { opacity: 0; }
+    .hero-stamp { position: absolute; z-index: 2; right: 7%; bottom: 8%; width: 92px; height: 92px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 13px; font-weight: 800; line-height: 1.05; text-align: center; text-transform: uppercase; transform: rotate(12deg); }
+    .hero-stamp span { display: block; color: var(--orange); font-size: 23px; }
+    .hero-index { position: absolute; top: 29px; right: 30px; z-index: 2; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .12em; }
+    @keyframes aqua-shift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+    .ticker { overflow: hidden; margin: 0 auto 72px; background: var(--ink); color: var(--lime); }
+    .ticker-track { min-width: max-content; display: flex; align-items: center; gap: 34px; padding: 13px 0; animation: ticker 28s linear infinite; }
+    .ticker-track span { font-family: "Barlow Condensed", Impact, sans-serif; font-size: 16px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker-track b { color: var(--orange); font-size: 14px; }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+    .section { padding: 0 0 86px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 26px; }
+    .section-kicker { margin: 0 0 9px; color: var(--orange); font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    .section-head h2 { margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(42px, 5vw, 63px); font-weight: 900; letter-spacing: -.025em; line-height: .9; text-transform: uppercase; }
+    .section-head p { max-width: 300px; margin: 0 0 3px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .shop-tools { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-bottom: 22px; }
+    .filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .filter-button { min-height: 34px; padding: 0 13px; border: 1px solid var(--line); border-radius: 30px; background: transparent; cursor: pointer; font-size: 9px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; transition: color .18s ease, background .18s ease, border-color .18s ease; }
+    .filter-button:hover, .filter-button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--lime); }
+    .search-box { width: 215px; height: 37px; display: flex; align-items: center; gap: 8px; padding: 0 11px; border-bottom: 1px solid #9a9992; }
+    .search-box svg { width: 15px; height: 15px; flex: 0 0 auto; }
+    .search-box input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 10px; }
+    .search-box input:focus-visible { outline: 0; }
+    .results-line { margin: 0 0 14px; color: var(--muted); font-size: 9px; font-weight: 700; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .product-card { min-width: 0; border: 1px solid #e6e4dc; background: #fff; transition: transform .22s ease, box-shadow .22s ease; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 16px 35px rgb(20 20 20 / 9%); }
+    .product-image { position: relative; height: clamp(220px, 25vw, 315px); overflow: hidden; background: #eeede7; }
+    .product-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+    .product-card:hover .product-image img { transform: scale(1.055); }
+    .product-image.contain img { object-fit: contain; padding: 14px; }
+    .product-tag { position: absolute; top: 12px; left: 12px; padding: 7px 9px; background: var(--lime); font-size: 8px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .product-tag.hot { background: var(--orange); color: #fff; }
+    .favorite { position: absolute; top: 10px; right: 10px; width: 33px; height: 33px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; cursor: pointer; }
+    .favorite svg { width: 15px; height: 15px; }
+    .favorite[aria-pressed="true"] { background: var(--orange); color: #fff; }
+    .favorite[aria-pressed="true"] svg { fill: currentColor; }
+    .product-info { padding: 14px 14px 13px; }
+    .product-category { margin: 0 0 5px; color: var(--muted); font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .product-name { margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 22px; font-weight: 800; letter-spacing: .015em; line-height: 1.05; text-transform: uppercase; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 14px; }
+    .product-price { font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .product-price del { margin-right: 5px; color: #aaa9a1; font-size: 9px; font-weight: 500; }
+    .buy-controls { display: flex; align-items: center; gap: 6px; }
+    .size-select { height: 34px; max-width: 69px; padding: 0 5px; border: 1px solid var(--line); border-radius: 0; background: #fff; font-size: 9px; }
+    .add-button { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid var(--ink); background: var(--ink); color: #fff; cursor: pointer; transition: background .18s ease, color .18s ease; }
+    .add-button:hover { background: var(--lime); color: var(--ink); }
+    .add-button svg { width: 15px; height: 15px; }
+    .empty-state { grid-column: 1 / -1; padding: 55px 20px; border: 1px dashed #c9c7bd; color: var(--muted); font-size: 12px; text-align: center; }
+    .archive-section { margin-top: 58px; padding-top: 31px; border-top: 1px solid var(--line); }
+    .archive-filters { margin: 20px 0 16px; }
+    .archive-count { margin: 0 0 13px; color: var(--muted); font-size: 9px; font-weight: 700; }
+    .archive-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; }
+    .archive-card { position: relative; min-width: 0; aspect-ratio: 4 / 5; margin: 0; overflow: hidden; background: #e9e8e1; }
+    .archive-card img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .35s ease; }
+    .archive-card:hover img { transform: scale(1.05); }
+    .archive-card.contain img { padding: 10px; object-fit: contain; background: #d9efe8; }
+    .archive-card figcaption { position: absolute; right: 0; bottom: 0; left: 0; padding: 20px 9px 9px; background: linear-gradient(transparent, rgb(0 0 0 / 70%)); color: #fff; font-size: 9px; font-weight: 800; }
+    .feature-band { position: relative; display: grid; grid-template-columns: 1fr .95fr; min-height: 375px; margin-bottom: 55px; overflow: hidden; background: linear-gradient(120deg, #009f83, #00c9ad, #00a980); background-size: 220% 220%; animation: aqua-shift 11s ease infinite; color: #fff; }
+    .feature-copy { position: relative; z-index: 1; align-self: center; padding: 45px 8%; }
+    .feature-copy .section-kicker { color: var(--lime); }
+    .feature-copy h2 { max-width: 500px; margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: clamp(49px, 6vw, 80px); font-weight: 900; letter-spacing: -.02em; line-height: .85; text-transform: uppercase; }
+    .feature-copy p { max-width: 340px; margin: 17px 0 22px; color: rgb(255 255 255 / 84%); font-size: 11px; line-height: 1.7; }
+    .button-light { min-height: 45px; display: inline-flex; align-items: center; gap: 15px; padding: 0 16px; border: 1px solid #fff; background: #fff; color: var(--ink); font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; transition: background .2s ease, color .2s ease; }
+    .button-light:hover { background: transparent; color: #fff; }
+    .feature-image { position: relative; min-height: 300px; overflow: hidden; }
+    .feature-image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; mix-blend-mode: multiply; transition: opacity .35s ease; }
+    .feature-image::after { position: absolute; inset: 0; background: linear-gradient(90deg, var(--orange), transparent 35%); content: ""; }
+    .feature-number { position: absolute; right: 18px; bottom: 9px; z-index: 2; color: rgb(255 255 255 / 75%); font-family: "Barlow Condensed", Impact, sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .15em; }
+    .mission-section { padding-bottom: 86px; }
+    .mission-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .mission-card { position: relative; min-height: 205px; padding: 26px 28px; overflow: hidden; border: 1px solid var(--line); background: #fff; }
+    .mission-card::after { position: absolute; right: -42px; bottom: -74px; width: 170px; height: 170px; border: 1px solid rgb(0 159 131 / 18%); border-radius: 50%; box-shadow: 0 0 0 20px rgb(0 159 131 / 4%); content: ""; }
+    .mission-card span { color: var(--orange); font-size: 9px; font-weight: 900; letter-spacing: .16em; text-transform: uppercase; }
+    .mission-card h3 { margin: 11px 0 8px; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 35px; font-weight: 900; letter-spacing: .01em; text-transform: uppercase; }
+    .mission-card p { position: relative; z-index: 1; max-width: 470px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; }
+    .values { display: grid; grid-template-columns: repeat(3, 1fr); margin: 0 0 85px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .value-item { display: flex; align-items: center; gap: 14px; padding: 20px; }
+    .value-item + .value-item { border-left: 1px solid var(--line); }
+    .value-icon { width: 39px; height: 39px; display: grid; flex: 0 0 auto; place-items: center; border-radius: 50%; background: var(--lime); }
+    .value-icon svg { width: 18px; height: 18px; }
+    .value-item strong { display: block; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+    .value-item span { display: block; margin-top: 4px; color: var(--muted); font-size: 9px; }
+    .newsletter { display: flex; align-items: center; justify-content: space-between; gap: 25px; margin-bottom: 78px; padding: 29px 35px; background: var(--ink); color: #fff; }
+    .newsletter h2 { margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 33px; font-weight: 900; text-transform: uppercase; }
+    .newsletter p { margin: 4px 0 0; color: #c1c1bb; font-size: 10px; }
+    .newsletter-form { width: min(420px, 50%); display: flex; border-bottom: 1px solid #8a8a82; }
+    .newsletter-form input { width: 100%; min-width: 0; padding: 11px 0; border: 0; outline: 0; background: transparent; color: #fff; font-size: 10px; }
+    .newsletter-form input:focus-visible { outline: 0; }
+    .newsletter-form button { padding: 0 0 0 12px; border: 0; background: transparent; color: var(--lime); cursor: pointer; font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .site-footer { padding: 30px 0 23px; border-top: 1px solid var(--line); }
+    .footer-top { display: flex; align-items: start; justify-content: space-between; gap: 30px; padding-bottom: 27px; }
+    .footer-brand { max-width: 240px; }
+    .footer-brand p { color: var(--muted); font-size: 9px; line-height: 1.6; }
+    .footer-links { display: flex; gap: clamp(20px, 4vw, 55px); }
+    .footer-links h3 { margin: 2px 0 10px; font-size: 9px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .footer-links a { display: block; margin-top: 8px; color: var(--muted); font-size: 9px; }
+    .footer-links a { overflow-wrap: anywhere; }
+    .footer-links a:hover { color: var(--orange); }
+    .social-label { margin: 16px 0 0; font-size: 9px; font-weight: 900; letter-spacing: .11em; text-transform: uppercase; }
+    .social-links { display: flex; gap: 7px; margin-top: 9px; }
+    .footer-links .social-links a { width: 31px; height: 31px; display: grid; place-items: center; margin: 0; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); font-size: 9px; font-weight: 900; transition: background .18s ease, border-color .18s ease; }
+    .footer-links .social-links a:hover { border-color: var(--lime); background: var(--lime); color: var(--ink); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--muted); font-size: 8px; }
+
+    .drawer-backdrop { position: fixed; z-index: 20; inset: 0; background: rgb(0 0 0 / 48%); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .drawer-backdrop.open { opacity: 1; pointer-events: auto; }
+    .cart-drawer { position: fixed; z-index: 21; top: 0; right: 0; width: min(430px, 100%); height: 100dvh; display: flex; flex-direction: column; padding: 24px; background: var(--paper); box-shadow: -15px 0 45px rgb(0 0 0 / 14%); transform: translateX(105%); transition: transform .28s ease; }
+    .cart-drawer.open { transform: translateX(0); }
+    [hidden] { display: none !important; }
+    .drawer-head { display: flex; align-items: center; justify-content: space-between; padding-bottom: 17px; border-bottom: 1px solid var(--line); }
+    .drawer-head h2 { margin: 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 30px; font-weight: 900; text-transform: uppercase; }
+    .close-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--line); background: transparent; cursor: pointer; }
+    .close-button svg { width: 16px; height: 16px; }
+    .cart-items { flex: 1; overflow-y: auto; padding: 5px 0; }
+    .cart-empty { padding: 48px 0; color: var(--muted); font-size: 11px; line-height: 1.6; text-align: center; }
+    .cart-item { display: grid; grid-template-columns: 75px 1fr auto; gap: 12px; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .cart-item img { width: 75px; height: 86px; object-fit: cover; background: #eeede7; }
+    .cart-item h3 { margin: 4px 0; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 17px; text-transform: uppercase; }
+    .cart-item p { margin: 0; color: var(--muted); font-size: 9px; }
+    .quantity { display: flex; align-items: center; gap: 9px; margin-top: 10px; }
+    .quantity button, .remove-item { border: 0; background: transparent; cursor: pointer; }
+    .quantity button { width: 22px; height: 22px; border: 1px solid var(--line); }
+    .quantity span { font-size: 10px; font-weight: 800; }
+    .cart-item-end { display: flex; flex-direction: column; align-items: end; justify-content: space-between; }
+    .cart-item-end strong { font-size: 10px; }
+    .remove-item { color: var(--muted); font-size: 8px; text-decoration: underline; }
+    .cart-summary { padding-top: 16px; border-top: 1px solid var(--line); }
+    .cart-total { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 11px; font-weight: 900; text-transform: uppercase; }
+    .checkout { width: 100%; }
+    .billing-form { flex: 1; overflow-y: auto; padding-top: 15px; }
+    .billing-back { padding: 0; border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 10px; font-weight: 800; }
+    .billing-form h3 { margin: 15px 0 5px; font-family: "Barlow Condensed", Impact, sans-serif; font-size: 31px; font-weight: 900; text-transform: uppercase; }
+    .billing-intro, .billing-note { color: var(--muted); font-size: 9px; line-height: 1.6; }
+    .billing-intro { margin: 0 0 16px; }
+    .billing-note { margin: 12px 0 0; }
+    .billing-mode { display: grid; gap: 8px; margin: 0 0 15px; padding: 0; border: 0; }
+    .billing-mode legend { margin-bottom: 8px; font-size: 10px; font-weight: 900; }
+    .billing-choice { display: flex; align-items: start; gap: 9px; padding: 11px; border: 1px solid var(--line); background: #fff; cursor: pointer; }
+    .billing-choice input { margin: 2px 0 0; accent-color: var(--orange); }
+    .billing-choice strong { display: block; font-size: 10px; }
+    .billing-choice small { display: block; margin-top: 3px; color: var(--muted); font-size: 8px; line-height: 1.4; }
+    .billing-form .form-field { display: grid; gap: 6px; margin-top: 11px; }
+    .billing-form .form-field label { color: #5d6b62; font-size: 9px; font-weight: 750; }
+    .billing-form .form-field input, .billing-form .form-field textarea { width: 100%; min-height: 39px; padding: 9px 10px; border: 1px solid var(--line); border-radius: 0; background: #fff; color: var(--ink); font-size: 10px; }
+    .billing-form .form-field textarea { min-height: 62px; resize: vertical; }
+    .billing-submit { width: 100%; margin-top: 17px; }
+    .toast { position: fixed; z-index: 30; right: 20px; bottom: 20px; max-width: calc(100% - 40px); padding: 13px 17px; background: var(--ink); color: #fff; box-shadow: 0 8px 28px rgb(0 0 0 / 20%); font-size: 10px; font-weight: 700; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity .2s ease, transform .2s ease; }
+    .toast.visible { opacity: 1; transform: translateY(0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; clip-path: inset(50%); border: 0; }
+
+    @media (max-width: 900px) {
+      .site-header { padding-right: 24px; padding-left: 24px; }
+      .page-wrap { width: calc(100% - 40px); }
+      .hero { min-height: 500px; }
+      .hero-copy { padding-left: 6%; }
+      .hero h1 { font-size: clamp(68px, 11vw, 110px); }
+      .product-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .product-image { height: clamp(250px, 47vw, 370px); }
+      .archive-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .feature-band { min-height: 335px; }
+      .feature-copy { padding-left: 7%; }
+    }
+    @media (max-width: 620px) {
+      html { scroll-padding-top: 72px; }
+      .announcement { font-size: 8px; letter-spacing: .1em; }
+      .site-header { min-height: 65px; gap: 10px; padding: 9px 16px; }
+      .brand img { width: 37px; height: 37px; }
+      .brand-name { font-size: 21px; }
+      .brand-tag { font-size: 7px; }
+      .menu-button { display: grid; }
+      .nav-links { position: absolute; top: 100%; right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 8px 18px 15px; border-bottom: 1px solid var(--line); background: var(--paper); }
+      .nav-links.open { display: grid; }
+      .nav-links a { padding: 12px 4px; border-bottom: 1px solid var(--line); }
+      .header-actions { gap: 7px; }
+      .icon-button { width: 36px; height: 36px; }
+      .page-wrap { width: calc(100% - 24px); }
+      .hero { min-height: 605px; grid-template-columns: 1fr; align-items: start; margin-top: 12px; }
+      .hero-copy { padding: 38px 23px 0; }
+      .hero h1 { margin-top: 17px; font-size: clamp(69px, 17vw, 100px); }
+      .hero-desc { max-width: 270px; margin: 15px 0 17px; font-size: 11px; }
+      .button-dark { min-height: 44px; padding: 0 14px; font-size: 9px; }
+      .hero-visual { top: auto; right: -7%; bottom: 2%; width: 100%; height: 49%; }
+      .hero-visual img { width: 95%; max-height: 310px; }
+      .hero-orbit { top: 4%; right: 20%; width: 250px; }
+      .hero-stamp { right: 10%; bottom: 7%; width: 70px; height: 70px; font-size: 10px; }
+      .hero-stamp span { font-size: 18px; }
+      .hero-index { top: 16px; right: 15px; font-size: 10px; }
+      .ticker { margin-bottom: 49px; }
+      .ticker-track { gap: 23px; padding: 11px 0; }
+      .ticker-track span { font-size: 13px; }
+      .section { padding-bottom: 56px; }
+      .section-head { align-items: start; flex-direction: column; gap: 11px; margin-bottom: 19px; }
+      .section-head h2 { font-size: 48px; }
+      .section-head p { font-size: 10px; }
+      .shop-tools { align-items: stretch; flex-direction: column-reverse; gap: 10px; }
+      .search-box { width: 100%; }
+      .filters { gap: 6px; }
+      .filter-button { min-height: 31px; padding: 0 10px; font-size: 8px; }
+      .product-grid { gap: 9px; }
+      .archive-section { margin-top: 43px; padding-top: 24px; }
+      .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .archive-card figcaption { font-size: 8px; }
+      .product-image { height: clamp(175px, 57vw, 255px); }
+      .product-image.contain img { padding: 8px; }
+      .product-tag { top: 8px; left: 8px; padding: 6px 7px; font-size: 7px; }
+      .favorite { top: 7px; right: 7px; width: 29px; height: 29px; }
+      .product-info { padding: 10px 9px; }
+      .product-name { font-size: 18px; }
+      .product-category { font-size: 7px; }
+      .product-bottom { align-items: end; flex-direction: column; gap: 8px; margin-top: 11px; }
+      .product-bottom > * { width: 100%; }
+      .product-price { font-size: 11px; }
+      .buy-controls { justify-content: space-between; }
+      .size-select { flex: 1; max-width: none; }
+      .add-button { width: 34px; flex: 0 0 34px; }
+      .feature-band { grid-template-columns: 1fr; min-height: 545px; margin-bottom: 56px; }
+      .feature-copy { padding: 33px 23px 0; }
+      .feature-copy h2 { font-size: 60px; }
+      .feature-copy p { max-width: 275px; margin: 12px 0 15px; font-size: 10px; }
+      .feature-image { min-height: 240px; }
+      .feature-image::after { background: linear-gradient(180deg, var(--orange), transparent 32%); }
+      .values { grid-template-columns: 1fr; margin-bottom: 55px; }
+      .mission-section { padding-bottom: 56px; }
+      .mission-grid { grid-template-columns: 1fr; gap: 9px; }
+      .mission-card { min-height: 0; padding: 22px 20px; }
+      .mission-card h3 { font-size: 31px; }
+      .value-item { padding: 14px 5px; }
+      .value-item + .value-item { border-top: 1px solid var(--line); border-left: 0; }
+      .newsletter { align-items: stretch; flex-direction: column; gap: 17px; margin-bottom: 55px; padding: 23px 19px; }
+      .newsletter h2 { font-size: 29px; }
+      .newsletter-form { width: 100%; }
+      .footer-top { flex-direction: column; }
+      .footer-links { width: 100%; justify-content: space-between; gap: 12px; }
+      .footer-bottom { flex-direction: column; gap: 5px; }
+      .cart-drawer { padding: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="announcement"><span>Envío gratis</span>&nbsp; en pedidos desde $100 USD &nbsp;·&nbsp; Cancha y calle, sin reglas</div>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="HENDA, inicio">
+      <img src="assets/catalogo/logo-henda.jpg" alt="">
+      <span class="brand-copy"><span class="brand-name">HENDA</span><span class="brand-tag">Shop &amp; shoes</span></span>
+    </a>
+    <nav class="nav-links" id="site-nav" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#coleccion" data-nav-filter="sneakers">Zapatillas</a>
+      <a href="#coleccion" data-nav-filter="caps">Gorras planas</a>
+      <a href="#mision-vision">Misión y visión</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="site-nav">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <button class="icon-button" id="cart-open" type="button" aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L22 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+        <span class="cart-count" id="cart-count" aria-live="polite">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero page-wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow">Colección 2026 · Drop 01</span>
+        <h1 id="hero-title">Nacidos<span>para jugar.</span></h1>
+        <p class="hero-desc">Pisa fuerte. Viste distinto. La nueva rotación de sneakers y gorras ya está aquí.</p>
+        <a class="button-dark" href="#coleccion">Descubre el drop <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <span class="hero-orbit"></span>
+        <img src="assets/catalogo/jordan-03.png" alt="">
+      </div>
+      <span class="hero-index">HND / 001</span>
+      <span class="hero-stamp">Cancha<span>×</span>calle</span>
+    </section>
+
+    <div class="ticker" aria-label="HENDA: juega a tu manera, eleva tu juego">
+      <div class="ticker-track" aria-hidden="true">
+        <span>Juega a tu manera</span><b>✳</b><span>Eleva tu juego</span><b>✳</b><span>Cancha y calle</span><b>✳</b><span>Juega a tu manera</span><b>✳</b><span>Eleva tu juego</span><b>✳</b><span>Cancha y calle</span><b>✳</b>
+      </div>
+    </div>
+
+    <section class="section page-wrap" id="coleccion" aria-labelledby="collection-title">
+      <div class="section-head">
+        <div><p class="section-kicker">Selección HENDA / 01</p><h2 id="collection-title">Piezas para<br>hacer ruido.</h2></div>
+        <p>Iconos de la cancha y esenciales de la calle. Elige tus favoritos y completa el fit.</p>
+      </div>
+      <div class="shop-tools">
+        <div class="filters" role="group" aria-label="Filtrar productos">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">Todo</button>
+          <button class="filter-button" type="button" data-filter="sneakers" aria-pressed="false">Zapatillas</button>
+          <button class="filter-button" type="button" data-filter="caps" aria-pressed="false">Gorras planas</button>
+        </div>
+        <label class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
+          <span class="sr-only">Buscar productos</span>
+          <input id="product-search" type="search" placeholder="Busca tu próximo par..." autocomplete="off">
+        </label>
+      </div>
+      <p class="results-line" id="results-line" aria-live="polite"></p>
+      <div class="product-grid" id="product-grid" aria-live="polite"></div>
+      <section class="archive-section" aria-labelledby="archive-title">
+        <div class="section-head">
+          <div><p class="section-kicker">Galería HENDA</p><h2 id="archive-title">Catálogo<br>completo.</h2></div>
+          <p>Explora todas las imágenes de zapatillas, gorras y colecciones disponibles.</p>
+        </div>
+        <div class="filters archive-filters" role="group" aria-label="Filtrar imágenes del catálogo">
+          <button class="filter-button" type="button" data-gallery-filter="all" aria-pressed="true">Todas</button>
+          <button class="filter-button" type="button" data-gallery-filter="sneakers" aria-pressed="false">Zapatillas</button>
+          <button class="filter-button" type="button" data-gallery-filter="caps" aria-pressed="false">Gorras</button>
+          <button class="filter-button" type="button" data-gallery-filter="catalogue" aria-pressed="false">Catálogo</button>
+        </div>
+        <p class="archive-count" id="archive-count" aria-live="polite"></p>
+        <div class="archive-grid" id="archive-grid"></div>
+      </section>
+    </section>
+
+    <section class="feature-band page-wrap" id="historia" aria-labelledby="feature-title">
+      <div class="feature-copy">
+        <p class="section-kicker">No es solo un juego</p>
+        <h2 id="feature-title">Tu estilo.<br>Tu cancha.</h2>
+        <p>De la primera jugada al último plan. Encuentra ese par que habla por ti y una gorra que remata el look.</p>
+        <a class="button-light" href="#coleccion">Arma tu rotación <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="feature-image" aria-hidden="true">
+        <img src="assets/catalogo/page-54.jpg" alt="">
+        <span class="feature-number">HENDA STUDIO — 2026</span>
+      </div>
+    </section>
+
+    <section class="mission-section section page-wrap" id="mision-vision" aria-labelledby="mission-heading">
+      <div class="section-head">
+        <div><p class="section-kicker">La esencia de HENDA</p><h2 id="mission-heading">Lo que nos<br>mueve.</h2></div>
+        <p>Más que equiparte: queremos inspirarte a llevar tu juego y tu estilo a tu manera.</p>
+      </div>
+      <div class="mission-grid">
+        <article class="mission-card">
+          <span>Nuestra misión</span>
+          <h3>Equipar tu actitud.</h3>
+          <p>Ofrecer zapatillas de baloncesto y gorras planas con estilo, calidad y una experiencia cercana, para que cada persona exprese su pasión por la cancha dentro y fuera de ella.</p>
+        </article>
+        <article class="mission-card">
+          <span>Nuestra visión</span>
+          <h3>Inspirar el próximo juego.</h3>
+          <p>Ser una marca referente de cultura basket y streetwear, creando una comunidad que celebra la autenticidad, la creatividad y la confianza en cada paso.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="values page-wrap" aria-label="Ventajas de comprar en HENDA">
+      <div class="value-item"><span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7z"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg></span><div><strong>Envío gratis</strong><span>En compras desde $100 USD</span></div></div>
+      <div class="value-item"><span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9a7 7 0 0 1 11.8-2L20 12M4 12l2.7 5a7 7 0 0 0 11.8-2"/></svg></span><div><strong>Cambio fácil</strong><span>30 días para decidir</span></div></div>
+      <div class="value-item"><span class="value-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg></span><div><strong>Compra segura</strong><span>Paga con total confianza</span></div></div>
+    </section>
+
+    <section class="newsletter page-wrap" aria-labelledby="newsletter-title">
+      <div><h2 id="newsletter-title">Del parquet a tu inbox.</h2><p>Novedades, drops y acceso anticipado. Sin spam, solo juego.</p></div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label class="sr-only" for="newsletter-email">Tu correo electrónico</label>
+        <input id="newsletter-email" name="email" type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Me apunto ↗</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer page-wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="#inicio"><img src="assets/catalogo/logo-henda.jpg" alt=""><span class="brand-copy"><span class="brand-name">HENDA</span><span class="brand-tag">Shop &amp; shoes</span></span></a>
+        <p>Para quienes llevan el juego en los pies y el estilo en la mirada.</p>
+      </div>
+      <div class="footer-links" id="contacto">
+        <div><h3>Explora</h3><a href="#coleccion">Zapatillas</a><a href="#coleccion">Gorras planas</a><a href="#coleccion">Lo más nuevo</a></div>
+        <div><h3>HENDA</h3><a href="#mision-vision">Misión y visión</a><a href="#historia">Nuestra actitud</a><a href="#inicio">Volver arriba ↑</a></div>
+        <div>
+          <h3>Contacto</h3>
+          <a href="tel:0991302902">0991302902</a>
+          <a href="mailto:david95henry19@gmail.com">david95henry19@gmail.com</a>
+          <p class="social-label">Síguenos</p>
+          <div class="social-links" aria-label="Redes sociales">
+            <a href="https://www.tiktok.com/@hendraxsan?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener noreferrer" aria-label="HENDA en TikTok">TT</a>
+            <a href="https://www.facebook.com/henda.d.portagas?locale=es_LA" target="_blank" rel="noopener noreferrer" aria-label="HENDA en Facebook">f</a>
+            <a href="https://www.instagram.com/hendraxsan/" target="_blank" rel="noopener noreferrer" aria-label="HENDA en Instagram">IG</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 HENDA Shop &amp; Shoes. Cancha y calle.</span><span>Hecho para jugar a tu manera.</span></div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Compra HENDA" aria-modal="true" role="dialog" aria-hidden="true">
+    <div class="drawer-head"><h2><span id="drawer-title">Tu rotación</span> <span id="drawer-count">(0)</span></h2><button class="close-button" id="cart-close" type="button" aria-label="Cerrar carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-summary"><div class="cart-total"><span>Total</span><span id="cart-total">$0</span></div><button class="button-dark checkout" id="checkout-button" type="button">Continuar a facturación <span aria-hidden="true">→</span></button></div>
+    <form class="billing-form" id="billing-form" hidden>
+      <button class="billing-back" id="billing-back" type="button">← Volver al carrito</button>
+      <h3 id="billing-heading">Facturación y entrega</h3>
+      <p class="billing-intro">Elige cómo emitir tu factura y completa los datos para coordinar el pedido por WhatsApp.</p>
+      <fieldset class="billing-mode">
+        <legend>Datos para la factura</legend>
+        <label class="billing-choice">
+          <input type="radio" name="billing-type" value="consumer-final" checked>
+          <span><strong>Consumidor final</strong><small>Sin datos adicionales de facturación.</small></span>
+        </label>
+        <label class="billing-choice">
+          <input type="radio" name="billing-type" value="with-data">
+          <span><strong>Ingresar datos de facturación</strong><small>Completa la información para tu factura.</small></span>
+        </label>
+      </fieldset>
+      <div class="billing-fields" id="invoice-fields" hidden>
+        <div class="form-field"><label for="invoice-name">Nombre o razón social</label><input id="invoice-name" name="invoice-name" autocomplete="organization" maxlength="120"></div>
+        <div class="form-field"><label for="invoice-id">Cédula o RUC</label><input id="invoice-id" name="invoice-id" autocomplete="off" maxlength="20"></div>
+        <div class="form-field"><label for="invoice-email">Correo para la factura</label><input id="invoice-email" name="invoice-email" type="email" autocomplete="email" maxlength="120"></div>
+        <div class="form-field"><label for="invoice-address">Dirección de facturación</label><textarea id="invoice-address" name="invoice-address" autocomplete="street-address" maxlength="200"></textarea></div>
+      </div>
+      <div class="form-field"><label for="delivery-name">Nombre de quien recibe</label><input id="delivery-name" name="delivery-name" autocomplete="name" maxlength="120" required></div>
+      <div class="form-field"><label for="delivery-phone">Teléfono de contacto</label><input id="delivery-phone" name="delivery-phone" type="tel" autocomplete="tel" maxlength="25" required></div>
+      <div class="form-field"><label for="delivery-address">Dirección de entrega</label><textarea id="delivery-address" name="delivery-address" autocomplete="shipping street-address" maxlength="200" required></textarea></div>
+      <button class="button-dark billing-submit" type="submit">Enviar pedido por WhatsApp <span aria-hidden="true">↗</span></button>
+      <p class="billing-note">El pedido se enviará por WhatsApp para confirmar los detalles y el pago. No se realizará ningún cobro en esta página.</p>
+    </form>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const products = [
+      { id: "aj3-red", name: "Air Jordan 3 Retro", category: "sneakers", categoryLabel: "Zapatillas de baloncesto", image: "assets/catalogo/page-03.jpg", price: 120, tag: "Hot drop", tagType: "hot", sizes: ["40", "41", "42", "43", "44", "45"] },
+      { id: "air-max-black", name: "Air Max DN Black", category: "sneakers", categoryLabel: "Street performance", image: "assets/catalogo/page-04.jpg", price: 110, tag: "Nuevo", tagType: "", sizes: ["40", "41", "42", "43", "44", "45"] },
+      { id: "aj4-white", name: "Jordan 4 Retro OG", category: "sneakers", categoryLabel: "Court classics", image: "assets/catalogo/page-10.jpg", price: 115, tag: "Selección H", tagType: "", sizes: ["40", "41", "42", "43", "44", "45"] },
+      { id: "bad-bunny-red", name: "Bad Bunny Forum", category: "sneakers", categoryLabel: "Edición especial", image: "assets/catalogo/page-30.jpg", price: 100, tag: "Limitado", tagType: "hot", sizes: ["40", "41", "42", "43", "44", "45"] },
+      { id: "cap-cross", name: "Flat Brim Cross", category: "caps", categoryLabel: "Gorra plana · Ajuste 59FIFTY", image: "assets/catalogo/page-54.jpg", price: 45, tag: "Nuevo", tagType: "", sizes: ["Única"] },
+      { id: "cap-rose", name: "Flat Brim Rose", category: "caps", categoryLabel: "Gorra plana · Colección bordada", image: "assets/catalogo/page-60.jpg", price: 45, tag: "HENDA pick", tagType: "", sizes: ["Única"] },
+      { id: "cap-pr", name: "Flat Brim PR", category: "caps", categoryLabel: "Gorra plana · Clásicos", image: "assets/catalogo/page-61.jpg", price: 45, tag: "", tagType: "", sizes: ["Única"] },
+      { id: "cap-mets", name: "Flat Brim Mets", category: "caps", categoryLabel: "Gorra plana · City series", image: "assets/catalogo/page-70.jpg", price: 45, tag: "Street icon", tagType: "", sizes: ["Única"] }
+    ];
+
+    const shoePhotoIds = [
+      "1260", "1262", "1264", "1265", "1267", "1269", "1270", "1272", "1274", "1277", "1278",
+      "1281", "1282", "1283", "1284", "1285", "1286", "1287", "1288", "1291", "1292", "1293",
+      "1295", "1296", "1297", "1298", "1299", "1300", "1302", "1303", "1305", "1306", "1308",
+      "1310", "1311", "1312", "1313", "1314", "1315", "1316", "1318", "1319", "1321", "1322",
+      "1323", "1324", "1325"
+    ];
+    const capPhotoFiles = [
+      "WhatsApp Image 2026-07-10 at 11.46.40 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.40.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.41 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.41.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.42 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.42 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.42.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.43 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.43 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.43 (3).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.43.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.44 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.44.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.45 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.45.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.47 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.47 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.47.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.48 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.48 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.48 (3).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.48 (4).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.48.jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.49 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.49 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 11.46.49.jpeg",
+      "WhatsApp Image 2026-07-10 at 12.23.22 (1).jpeg",
+      "WhatsApp Image 2026-07-10 at 12.23.22 (2).jpeg",
+      "WhatsApp Image 2026-07-10 at 12.23.22 (3).jpeg",
+      "WhatsApp Image 2026-07-10 at 12.23.22 (4).jpeg",
+      "WhatsApp Image 2026-07-10 at 12.23.22.jpeg"
+    ];
+    const catalogueImages = [
+      ...Array.from({ length: 46 }, (_, index) => {
+        const page = String(index + 3).padStart(2, "0");
+        return { src: `assets/catalogo/page-${page}.jpg`, category: "catalogue", label: `Catálogo HENDA · ${page}` };
+      }),
+      ...Array.from({ length: 31 }, (_, index) => {
+        const page = String(index + 50).padStart(2, "0");
+        return { src: `assets/catalogo/page-${page}.jpg`, category: "catalogue", label: `Catálogo HENDA · ${page}` };
+      }),
+      ...["03", "05", "16", "42", "44"].map((number, index) => ({
+        src: `assets/catalogo/jordan-${number}.png`,
+        category: "sneakers",
+        label: `Sneaker HENDA · Edición gráfica ${String(index + 1).padStart(2, "0")}`,
+        contain: true
+      })),
+      { src: "assets/catalogo/logo-henda.jpg", category: "catalogue", label: "Identidad HENDA" }
+    ];
+    const galleryItems = [
+      ...shoePhotoIds.map((id, index) => ({
+        src: `zapatillas/IMG-20261108-WA${id}.jpg`,
+        category: "sneakers",
+        label: `Zapatilla HENDA · ${String(index + 1).padStart(2, "0")}`
+      })),
+      ...capPhotoFiles.map((file, index) => ({
+        src: `gorras/${file}`,
+        category: "caps",
+        label: `Gorra plana HENDA · ${String(index + 1).padStart(2, "0")}`
+      })),
+      ...catalogueImages
+    ];
+
+    const cartStorageKey = "henda-cart-v1";
+    const grid = document.getElementById("product-grid");
+    const archiveGrid = document.getElementById("archive-grid");
+    const archiveCount = document.getElementById("archive-count");
+    const searchInput = document.getElementById("product-search");
+    const resultsLine = document.getElementById("results-line");
+    const toast = document.getElementById("toast");
+    const cartDrawer = document.getElementById("cart-drawer");
+    const backdrop = document.getElementById("drawer-backdrop");
+    const cartItems = document.getElementById("cart-items");
+    const cartSummary = document.querySelector(".cart-summary");
+    const billingForm = document.getElementById("billing-form");
+    const invoiceFields = document.getElementById("invoice-fields");
+    const drawerTitle = document.getElementById("drawer-title");
+    const drawerCount = document.getElementById("drawer-count");
+    let activeFilter = "all";
+    let cart = loadCart();
+    let toastTimer;
+
+    function loadCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(cartStorageKey) || "[]");
+        if (!Array.isArray(saved)) throw new Error("Formato de carrito no válido");
+        return saved.filter((item) =>
+          item && products.some((product) => product.id === item.id) &&
+          Number.isInteger(item.quantity) && item.quantity > 0 &&
+          typeof item.size === "string"
+        );
+      } catch (error) {
+        console.error("No se pudo leer el carrito guardado.", error);
+        return [];
+      }
+    }
+
+    function saveCart() {
+      try {
+        localStorage.setItem(cartStorageKey, JSON.stringify(cart));
+        return true;
+      } catch (error) {
+        console.error("No se pudo guardar el carrito.", error);
+        showToast("No pudimos guardar tu carrito en este navegador.");
+        return false;
+      }
+    }
+
+    function formatPrice(price) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(price);
+    }
+
+    function productCard(product) {
+      const tag = product.tag ? `<span class="product-tag ${product.tagType}">${product.tag}</span>` : "";
+      const oldPrice = product.oldPrice ? `<del>${formatPrice(product.oldPrice)}</del>` : "";
+      const sizes = product.sizes.map((size) => `<option value="${size}">${size === "Única" ? "Talla única" : size}</option>`).join("");
+      return `<article class="product-card" data-category="${product.category}">
+        <div class="product-image ${product.category === "sneakers" && product.id === "aj3-red" ? "contain" : ""}">
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          ${tag}
+          <button class="favorite" type="button" aria-label="Añadir ${product.name} a favoritos" aria-pressed="false" data-favorite="${product.id}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"/></svg>
+          </button>
+        </div>
+        <div class="product-info">
+          <p class="product-category">${product.categoryLabel}</p>
+          <h3 class="product-name">${product.name}</h3>
+          <div class="product-bottom">
+            <span class="product-price">${oldPrice}${formatPrice(product.price)}</span>
+            <div class="buy-controls">
+              <label class="sr-only" for="size-${product.id}">Talla para ${product.name}</label>
+              <select class="size-select" id="size-${product.id}" aria-label="Talla para ${product.name}">${sizes}</select>
+              <button class="add-button" type="button" aria-label="Añadir ${product.name} al carrito" data-add="${product.id}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function renderProducts() {
+      const query = searchInput.value.trim().toLocaleLowerCase("es");
+      const visible = products.filter((product) =>
+        (activeFilter === "all" || product.category === activeFilter) &&
+        `${product.name} ${product.categoryLabel}`.toLocaleLowerCase("es").includes(query)
+      );
+      resultsLine.textContent = `${visible.length} ${visible.length === 1 ? "pieza" : "piezas"} para tu rotación`;
+      grid.innerHTML = visible.length
+        ? visible.map(productCard).join("")
+        : '<p class="empty-state">No encontramos productos con esa búsqueda. Prueba con otra palabra.</p>';
+    }
+
+    function renderGallery(filter = "all") {
+      const visible = filter === "all"
+        ? galleryItems
+        : galleryItems.filter((image) => image.category === filter);
+      archiveCount.textContent = `${visible.length} imágenes en esta selección`;
+      archiveGrid.innerHTML = visible.map((image) => `
+        <figure class="archive-card${image.contain ? " contain" : ""}">
+          <img src="${image.src}" alt="${image.label}" loading="lazy" decoding="async">
+          <figcaption>${image.label}</figcaption>
+        </figure>
+      `).join("");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("visible");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => toast.classList.remove("visible"), 2600);
+    }
+
+    function renderCart() {
+      const count = cart.reduce((total, item) => total + item.quantity, 0);
+      const total = cart.reduce((sum, item) => {
+        const product = products.find((entry) => entry.id === item.id);
+        return sum + (product ? product.price * item.quantity : 0);
+      }, 0);
+      document.getElementById("cart-count").textContent = String(count);
+      document.getElementById("drawer-count").textContent = `(${count})`;
+      document.getElementById("cart-total").textContent = formatPrice(total);
+      document.getElementById("cart-items").innerHTML = cart.length
+        ? cart.map((item) => {
+          const product = products.find((entry) => entry.id === item.id);
+          if (!product) return "";
+          return `<article class="cart-item">
+            <img src="${product.image}" alt="">
+            <div><h3>${product.name}</h3><p>Talla: ${item.size}</p>
+              <div class="quantity"><button type="button" aria-label="Quitar una unidad de ${product.name}" data-quantity="-1" data-id="${item.id}" data-size="${item.size}">−</button><span>${item.quantity}</span><button type="button" aria-label="Añadir una unidad de ${product.name}" data-quantity="1" data-id="${item.id}" data-size="${item.size}">+</button></div>
+            </div>
+            <div class="cart-item-end"><strong>${formatPrice(product.price * item.quantity)}</strong><button class="remove-item" type="button" data-remove="${item.id}" data-size="${item.size}">Eliminar</button></div>
+          </article>`;
+        }).join("")
+        : '<p class="cart-empty">Tu carrito está vacío.<br>El próximo gran look empieza aquí.</p>';
+    }
+
+    function openCart() {
+      cartDrawer.classList.add("open");
+      backdrop.classList.add("open");
+      cartDrawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      document.getElementById("cart-close").focus();
+    }
+
+    function showBillingStep() {
+      if (!cart.length) {
+        showToast("Tu carrito está vacío. Elige algo para empezar.");
+        return;
+      }
+      cartItems.hidden = true;
+      cartSummary.hidden = true;
+      billingForm.hidden = false;
+      drawerTitle.textContent = "Facturación";
+      drawerCount.hidden = true;
+      document.getElementById("billing-back").focus();
+    }
+
+    function showCartStep() {
+      billingForm.hidden = true;
+      cartItems.hidden = false;
+      cartSummary.hidden = false;
+      drawerTitle.textContent = "Tu rotación";
+      drawerCount.hidden = false;
+      document.getElementById("checkout-button").focus();
+    }
+
+    function closeCart() {
+      cartDrawer.classList.remove("open");
+      backdrop.classList.remove("open");
+      cartDrawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      document.getElementById("cart-open").focus();
+    }
+
+    function addToCart(productId, size) {
+      const product = products.find((entry) => entry.id === productId);
+      if (!product) return;
+      const existing = cart.find((item) => item.id === productId && item.size === size);
+      if (existing) existing.quantity += 1;
+      else cart.push({ id: productId, size, quantity: 1 });
+      saveCart();
+      renderCart();
+      showToast(`${product.name} añadido a tu rotación.`);
+    }
+
+    document.querySelectorAll(".filter-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        activeFilter = button.dataset.filter;
+        document.querySelectorAll(".filter-button").forEach((filter) => filter.setAttribute("aria-pressed", String(filter === button)));
+        renderProducts();
+      });
+    });
+
+    document.querySelectorAll("[data-gallery-filter]").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll("[data-gallery-filter]").forEach((filter) => {
+          filter.setAttribute("aria-pressed", String(filter === button));
+        });
+        renderGallery(button.dataset.galleryFilter);
+      });
+    });
+
+    document.querySelectorAll("[data-nav-filter]").forEach((link) => {
+      link.addEventListener("click", () => {
+        activeFilter = link.dataset.navFilter;
+        document.querySelectorAll(".filter-button").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.filter === activeFilter)));
+        renderProducts();
+        document.getElementById("site-nav").classList.remove("open");
+        document.querySelector(".menu-button").setAttribute("aria-expanded", "false");
+      });
+    });
+
+    searchInput.addEventListener("input", renderProducts);
+    grid.addEventListener("click", (event) => {
+      const addButton = event.target.closest("[data-add]");
+      if (addButton) {
+        const productId = addButton.dataset.add;
+        const size = document.getElementById(`size-${productId}`).value;
+        addToCart(productId, size);
+        return;
+      }
+      const favoriteButton = event.target.closest("[data-favorite]");
+      if (favoriteButton) {
+        const selected = favoriteButton.getAttribute("aria-pressed") !== "true";
+        favoriteButton.setAttribute("aria-pressed", String(selected));
+        showToast(selected ? "Guardado en tus favoritos." : "Quitado de tus favoritos.");
+      }
+    });
+
+    document.getElementById("cart-items").addEventListener("click", (event) => {
+      const quantityButton = event.target.closest("[data-quantity]");
+      const removeButton = event.target.closest("[data-remove]");
+      if (quantityButton) {
+        const item = cart.find((entry) => entry.id === quantityButton.dataset.id && entry.size === quantityButton.dataset.size);
+        if (!item) return;
+        item.quantity += Number(quantityButton.dataset.quantity);
+        cart = cart.filter((entry) => entry.quantity > 0);
+      } else if (removeButton) {
+        cart = cart.filter((entry) => !(entry.id === removeButton.dataset.remove && entry.size === removeButton.dataset.size));
+      } else return;
+      saveCart();
+      renderCart();
+    });
+
+    document.getElementById("cart-open").addEventListener("click", openCart);
+    document.getElementById("cart-close").addEventListener("click", closeCart);
+    backdrop.addEventListener("click", closeCart);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && cartDrawer.classList.contains("open")) closeCart();
+    });
+    document.getElementById("checkout-button").addEventListener("click", showBillingStep);
+    document.getElementById("billing-back").addEventListener("click", showCartStep);
+    billingForm.querySelectorAll('input[name="billing-type"]').forEach((input) => {
+      input.addEventListener("change", () => {
+        if (!input.checked) return;
+        const needsInvoiceData = input.value === "with-data";
+        invoiceFields.hidden = !needsInvoiceData;
+        invoiceFields.querySelectorAll("input, textarea").forEach((field) => {
+          field.required = needsInvoiceData;
+        });
+      });
+    });
+
+    billingForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!billingForm.reportValidity()) return;
+
+      const formData = new FormData(billingForm);
+      const billingType = formData.get("billing-type");
+      const orderLines = cart.map((item) => {
+        const product = products.find((entry) => entry.id === item.id);
+        return product ? `• ${product.name} — talla ${item.size} × ${item.quantity}: ${formatPrice(product.price * item.quantity)}` : "";
+      }).filter(Boolean);
+      const total = cart.reduce((sum, item) => {
+        const product = products.find((entry) => entry.id === item.id);
+        return sum + (product ? product.price * item.quantity : 0);
+      }, 0);
+      const message = [
+        "Hola, quiero confirmar este pedido de HENDA:",
+        ...orderLines,
+        `Total: ${formatPrice(total)} USD`,
+        "",
+        `Facturación: ${billingType === "consumer-final" ? "Consumidor final" : "Con datos"}`,
+        ...(billingType === "with-data" ? [
+          `Nombre / razón social: ${formData.get("invoice-name")}`,
+          `Cédula / RUC: ${formData.get("invoice-id")}`,
+          `Correo de factura: ${formData.get("invoice-email")}`,
+          `Dirección de facturación: ${formData.get("invoice-address")}`
+        ] : []),
+        "",
+        `Recibe: ${formData.get("delivery-name")}`,
+        `Teléfono: ${formData.get("delivery-phone")}`,
+        `Dirección de entrega: ${formData.get("delivery-address")}`
+      ].join("\n");
+      const whatsappUrl = `https://wa.me/593991302902?text=${encodeURIComponent(message)}`;
+      window.location.assign(whatsappUrl);
+    });
+
+    document.querySelector(".menu-button").addEventListener("click", (event) => {
+      const button = event.currentTarget;
+      const open = button.getAttribute("aria-expanded") !== "true";
+      button.setAttribute("aria-expanded", String(open));
+      button.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      document.getElementById("site-nav").classList.toggle("open", open);
+    });
+    document.querySelectorAll("#site-nav a:not([data-nav-filter])").forEach((link) => {
+      link.addEventListener("click", () => {
+        document.getElementById("site-nav").classList.remove("open");
+        document.querySelector(".menu-button").setAttribute("aria-expanded", "false");
+      });
+    });
+    document.getElementById("newsletter-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const email = document.getElementById("newsletter-email");
+      if (!email.reportValidity()) return;
+      showToast("¡Ya estás en la lista! Nos vemos en el próximo drop.");
+      email.value = "";
+    });
+
+    function startImageRotation(image, sources, interval) {
+      let currentIndex = 0;
+      sources.slice(1).forEach((source) => {
+        const preloadedImage = new Image();
+        preloadedImage.src = source;
+      });
+      window.setInterval(() => {
+        currentIndex = (currentIndex + 1) % sources.length;
+        image.classList.add("is-changing");
+        window.setTimeout(() => {
+          image.src = sources[currentIndex];
+          image.classList.remove("is-changing");
+        }, 350);
+      }, interval);
+    }
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      startImageRotation(document.querySelector(".hero-visual img"), [
+        "assets/catalogo/jordan-03.png",
+        "assets/catalogo/jordan-05.png",
+        "assets/catalogo/jordan-16.png",
+        "assets/catalogo/jordan-42.png",
+        "assets/catalogo/jordan-44.png"
+      ], 4200);
+      startImageRotation(document.querySelector(".feature-image img"), [
+        "assets/catalogo/page-54.jpg",
+        "assets/catalogo/page-60.jpg",
+        "assets/catalogo/page-61.jpg",
+        "assets/catalogo/page-70.jpg",
+        "assets/catalogo/page-03.jpg",
+        "assets/catalogo/page-10.jpg"
+      ], 4800);
+    }
+
+    renderProducts();
+    renderGallery();
+    renderCart();
+  </script>
+</body>
+</html>
